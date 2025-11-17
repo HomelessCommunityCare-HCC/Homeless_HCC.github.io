@@ -10,8 +10,8 @@ ACCOUNTS = [
 code = "HCC"
 issuer = "GDKSAFCZI3U4SIZAFGY2QWTOC7DFZJGDGSBC6VLSPFYLOII24W6KFUNS"
 display_decimals = 7
-name = "Homeless Community Care"
-desc = "Homeless Token — supporting homeless initiatives and community outreach programs.Homeless Token was born from a simple, painful reality: too many people fall through the cracks, and the world moves on like nothing happened. 
+name = "Homeless Community Care "
+desc = "Homeless Token HCC for short— supporting homeless initiatives and community outreach programs.Homeless Token was born from a simple, painful reality: too many people fall through the cracks, and the world moves on like nothing happened. 
 	This token exists to make sure those people are never ignored again.
 		Every Homeless Token carries the weight of someone’s cold night, someone’s empty stomach, someone’s quiet prayer that tomorrow might 
 hurt less than today. It carries the story of the veteran sleeping under a bridge, the single parent holding a child close to stay warm, 
@@ -30,7 +30,8 @@ at events all over the country. Which in turn also goes back to Homeless for nec
 areas. These are our short term goals for the nearest future. With Gods blessings and your generious token and donation purchases. God will grant us these
 much needed blessings. From the founder and CEO of Homeless, Jason Cook I thank you and God Bless.  Oh and Remember:
 		Homeless Token isn’t about crypto. It’s about humanity. And humanity is worth everything."
-conditions = "https://Homeless_HCC.github.io/terms.html"
+		
+conditions = "https://Homeless_HCC.github.io"
 
 image = "https://Homeless_HCC.github.io/homeless2_logo.png"
 
