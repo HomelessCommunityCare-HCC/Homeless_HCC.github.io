@@ -1,5 +1,6 @@
 VERSION = "2.0.0"
 NETWORK_PASSPHRASE = "Public Global Stellar Network ; September 2015"
+HOME_DOMAIN = "homelesscommunitycare-hcc.github.io"
 
 ACCOUNTS = [
   "GDKSAFCZI3U4SIZAFGY2QWTOC7DFZJGDGSBC6VLSPFYLOII24W6KFUNS",
@@ -31,9 +32,9 @@ areas. These are our short term goals for the nearest future. With Gods blessing
 much needed blessings. From the founder and CEO of Homeless, Jason Cook I thank you and God Bless.  Oh and Remember:
 		Homeless Token isn’t about crypto. It’s about humanity. And humanity is worth everything."
 		
-conditions = "https://Homeless_HCC.github.io"
+conditions = "https://homelesscommunitycare-hcc.github.io"
 
-image = "https://Homeless_HCC.github.io/homeless2_logo.png"
+image = "https://homelesscommunitycare-hcc.github.io/homeless2_logo.png"
 
 is_unlimited = false
 is_asset_anchored = false

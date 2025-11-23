@@ -1,4 +1,5 @@
 NETWORK_PASSPHRASE="Public Global Stellar Network ; September 2015"
+HOME_DOMAIN="homelesscommunitycare-hcc.github.io"
 FEDERATION_SERVER="https://api.domain.com/federation"
 AUTH_SERVER="https://api.domain.com/auth"
 TRANSFER_SERVER="https://api.domain.com"
@@ -15,8 +16,8 @@ VERSION="2.0.0"
 [DOCUMENTATION]
 ORG_NAME="Homeless Community Care"
 ORG_DBA="Organization DBA"
-ORG_URL="https://www.Homeless_Hcc.github.io"
-ORG_LOGO="https://www.github.io/homeless2_logo.png"
+ORG_URL="https://homelesscommunitycare-hcc.github.io"
+ORG_LOGO="https://homelesscommunitycare-hcc.github.io/homeless2_logo.png"
 ORG_DESCRIPTION="
 ORG_PHYSICAL_ADDRESS="
 ORG_PHYSICAL_ADDRESS_ATTESTATION="https://www.domain.com/address_attestation.jpg"
@@ -24,7 +25,7 @@ ORG_PHONE_NUMBER="1 (298)-263-4786"
 ORG_PHONE_NUMBER_ATTESTATION="https://www.domain.com/phone_attestation.jpg"
 ORG_KEYBASE="accountname"
 ORG_TWITTER="orgtweet"
-ORG_GITHUB="Homeless_Hcc.github.io"
+ORG_GITHUB="HomelessCommunityCare-HCC/Homeless_HCC.github.io"
 ORG_OFFICIAL_EMAIL="homelesscoin2025@gmail.com"
 
 [[PRINCIPALS]]
@@ -32,7 +33,7 @@ name="Jason Matthew Cook"
 email="homelesscoin2025@gmail.com"
 keybase=""
 twitter=""
-github="homeless_Hcc.github.io"
+github="HomelessCommunityCare-HCC/Homeless_HCC.github.io"
 id_photo_hash=""
 verification_photo_hash=""
 
@@ -68,5 +69,5 @@ conditions="There will only ever be 333,000,000,000 HCC in existence.,
             HCC Coin is not backed by a physical asset or precious metal,
             HCC Coin value is only attached to the trust provided by the network's users and the loyal, 
             loving, Homeless commuity that supports the cause."
-image="https://homelesszenhand1_logo.PNG"
+image="https://homelesscommunitycare-hcc.github.io/homeless2_logo.png"
 fixed_number="333,000,000,000"
