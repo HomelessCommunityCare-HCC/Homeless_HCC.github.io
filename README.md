@@ -1,11 +1,12 @@
-# Homeless_HCC.github.io
+# Homeless-HCC.github.io
 # Homeless
 "The Token that will change lives"
-A Stellar-based token built on the Stellar blockchain.
-![Homeless Token Logo](./<img width="608" height="677" alt="homelesszenhan1_logo" src="https://github.com/user-attachments/assets/e18171b3-a4b0-46a4-b8d8-92651d953a61" />
+"A Stellar-based token built on the Stellar blockchain."
+
+"#1homelesscoin.logo,  src=<img width="158" height="158" alt="#1homelesscoin logo" src="https://github.com/user-attachments/assets/107d0d1c-4ab4-4196-a8b6-6c86b49afd48" />"
 
 ## About 
-"The Homeless Token is designed to support homeless communities,build better housing, feed, and clothes by providing a transparent way to donate and track charitable contributions on the Stellar blockchain. This token enables direct peer-to-peer transactions with minimal fees."
+"The Homeles coin  is designed to support homeless communities,build better housing, feed, and clothes by providing a transparent way to donate and track charitable contributions on the Stellar blockchain. This token enables direct peer-to-peer transactions with minimal fees."
 
 
 ## Token Details
@@ -49,14 +50,15 @@ desc = "  Homeless Token is dedicated to supporting homeless initiatives and com
 				                      Homeless Token isn’t about crypto. It’s about humanity. And humanity is worth everything.
 "
 
-conditions = "https://homeless.github.io/terms.html"
+conditions = "https://homeless-hcc.github.io/terms.html"
 
 image = "https://homeless.github.io/logo.png"
 
 is_unlimited = false
 
-is_asset_anchored = false
+is_asset_anchored = true
 
+anchored_asset_is = Homeless
 status = "live"
 
 
