@@ -1,0 +1,124 @@
+'use strict';
+
+/**
+ * Usage:
+ *   node src/checkMainnet.js ISSUER_PUBLIC DISTRIBUTION_PUBLIC ASSET_CODE
+ *
+ * Example:
+ *   node src/checkMainnet.js GDKS... GAU3... HOMELESS
+ *
+ * Or set env variables and run `node src/checkMainnet.js`:
+ *   ISSUER_PUBLIC=GDKS... DISTRIBUTION_PUBLIC=GAU3... ASSET_CODE=HOMELESS node src/checkMainnet.js
+ *
+ * NOTE: Do NOT provide secret keys. This script only uses public keys and reads Horizon.
+ */
+
+const StellarSdk = require('stellar-sdk');
+
+const args = process.argv.slice(2);
+const issuerPublic = process.env.ISSUER_PUBLIC || args[0];
+const distributionPublic = process.env.DISTRIBUTION_PUBLIC || args[1];
+const assetCode = process.env.ASSET_CODE || args[2] || 'HOMELESS';
+const HORIZON_URL = process.env.HORIZON_URL || 'https://horizon.stellar.org';
+
+if (!issuerPublic || !distributionPublic) {
+  console.error('ERROR: issuer and distribution public keys must be provided.');
+  console.error('Usage: node src/checkMainnet.js ISSUER_PUBLIC DISTRIBUTION_PUBLIC ASSET_CODE');
+  process.exit(2);
+}
+
+const server = new StellarSdk.Server(HORIZON_URL);
+
+async function loadAccountSafe(accountId) {
+  try {
+    const acc = await server.loadAccount(accountId);
+    return { exists: true, account: acc };
+  } catch (err) {
+    if (err && err.response && err.response.status === 404) {
+      return { exists: false, error: 'Account not found' };
+    }
+    return { exists: false, error: err.message || String(err) };
+  }
+}
+
+function findAssetBalance(balances, code, issuer) {
+  for (const b of balances) {
+    if (b.asset_type === 'native') continue;
+    if (b.asset_code === code && b.asset_issuer === issuer) return b;
+  }
+  return null;
+}
+
+(async () => {
+  console.log('Horizon URL:', HORIZON_URL);
+  console.log('Issuer:', issuerPublic);
+  console.log('Distribution:', distributionPublic);
+  console.log('Asset code:', assetCode);
+  console.log('---');
+
+  const issuerRes = await loadAccountSafe(issuerPublic);
+  if (!issuerRes.exists) {
+    console.log('Issuer account NOT FOUND on mainnet:', issuerRes.error);
+  } else {
+    const ia = issuerRes.account;
+    console.log('Issuer exists.');
+    console.log('  Sequence:', ia.sequence);
+    console.log('  Flags:', JSON.stringify(ia.flags || {}));
+    console.log('  Balances:');
+    ia.balances.forEach(b => {
+      if (b.asset_type === 'native') {
+        console.log(`    XLM: ${b.balance}`);
+      } else {
+        console.log(`    ${b.asset_code} (issuer: ${b.asset_issuer}) : ${b.balance} (limit: ${b.limit || 'N/A'})`);
+      }
+    });
+    const issuerAssetLine = findAssetBalance(ia.balances, assetCode, issuerPublic);
+    if (issuerAssetLine) {
+      console.log(`  Issuer holds ${issuerAssetLine.balance} ${assetCode}`);
+    } else {
+      console.log(`  Issuer does not hold ${assetCode} (this is normal after distribution).`);
+    }
+  }
+
+  console.log('---');
+
+  const distRes = await loadAccountSafe(distributionPublic);
+  if (!distRes.exists) {
+    console.log('Distribution account NOT FOUND on mainnet:', distRes.error);
+    console.log('If distribution does not exist you must create/fund it to receive tokens.');
+  } else {
+    const da = distRes.account;
+    console.log('Distribution exists.');
+    console.log('  Sequence:', da.sequence);
+    console.log('  Balances:');
+    da.balances.forEach(b => {
+      if (b.asset_type === 'native') {
+        console.log(`    XLM: ${b.balance}`);
+      } else {
+        console.log(`    ${b.asset_code} (issuer: ${b.asset_issuer}) : ${b.balance} (limit: ${b.limit || 'N/A'})`);
+      }
+    });
+
+    const distAssetLine = findAssetBalance(da.balances, assetCode, issuerPublic);
+    if (distAssetLine) {
+      console.log(`Distribution holds ${distAssetLine.balance} ${assetCode} issued by ${issuerPublic}`);
+    } else {
+      // check if trustline exists but 0 balance (some explorers show limit or 0)
+      const trustlineExists = da.balances.some(b => b.asset_code === assetCode && b.asset_issuer === issuerPublic);
+      if (trustlineExists) {
+        console.log(`Distribution has a trustline for ${assetCode} but balance is 0.`);
+      } else {
+        console.log(`Distribution does NOT have a trustline for ${assetCode} issued by ${issuerPublic}.`);
+      }
+    }
+  }
+
+  console.log('---');
+  console.log('Interpretation hints:');
+  console.log(' - If distribution shows a balance for HOMELESS with asset_issuer equal to the issuer, then distribution currently holds the tokens.');
+  console.log(' - If distribution lacks a trustline or account not found, you must create/fund the distribution account and add the trustline before issuing or transferring.');
+  console.log(' - If issuer.flags.auth_required === true, the issuer must authorize trustlines (or approve distribution) before distribution can hold tokens; check issuer.flags.');
+  console.log(' - If the issuer account is missing on mainnet, the asset as originally issued no longer has that issuer key on mainnet: you would need to re-issue from a different issuer key (different asset identity).');
+  console.log('');
+  console.log('Paste the script output here if you want me to interpret it further.');
+})();
