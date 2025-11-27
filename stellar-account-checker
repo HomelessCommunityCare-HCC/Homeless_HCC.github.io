@@ -1,3 +1,21 @@
+{
+  "name": "stellar-account-checker",
+  "version": "0.1.0",
+  "description": "Check Stellar mainnet issuer/distribution accounts and asset balances",
+  "main": "src/checkMainnet.js",
+  "scripts": {
+    "check": "node src/checkMainnet.js"
+  },
+  "dependencies": {
+    "stellar-sdk": "^10.5.0",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
+
 'use strict';
 
 /**
